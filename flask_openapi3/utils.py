@@ -33,6 +33,8 @@ from .types import ResponseDict
 from .types import ResponseStrKeyDict
 
 HTTP_STATUS = {str(status.value): status.phrase for status in HTTPStatus}
+# fix for https://github.com/luolingchun/flask-openapi3/issues/187
+HTTP_STATUS["default"] = HTTPStatus(422).phrase
 
 if sys.version_info < (3, 11):  # pragma: no cover
 
