@@ -47,7 +47,6 @@ from .style_values import StyleValues
 from .tag import Tag
 from .validation_error import UnprocessableEntity
 from .validation_error import ValidationErrorModel
-from .webhook import Webhook
 from .xml import XML
 
 OPENAPI3_REF_PREFIX = "#/components/schemas"
@@ -64,7 +63,7 @@ class APISpec(BaseModel):
     security: Optional[List[SecurityRequirement]] = None
     tags: Optional[List[Tag]] = None
     externalDocs: Optional[ExternalDocumentation] = None
-    webhooks: Optional[Dict[str, Union[Webhook, Reference]]] = None
+    webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
 
     model_config = {
         "extra": "allow"
