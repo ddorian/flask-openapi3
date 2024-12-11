@@ -14,6 +14,7 @@ from pydantic import BaseModel, RootModel, Field
 from flask_openapi3 import ExternalDocumentation
 from flask_openapi3 import Info, Tag
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 info = Info(title='book API', version='1.0.0')
 
@@ -25,7 +26,7 @@ jwt = {
 security_schemes = {"jwt": jwt}
 
 
-class NotFoundResponse(BaseModel):
+class NotFoundResponse(MyBaseModel):
     code: int = Field(-1, description="Status Code")
     message: str = Field("Resource not found!", description="Exception Information")
 
@@ -48,26 +49,26 @@ security = [{"jwt": []}]
 book_tag = Tag(name='book', description='Book')
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: Optional[int] = Field(None, description='Age')
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: Optional[int] = Field(..., ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     bid: int = Field(..., description='book id')
 
 
-class BookBodyWithID(BaseModel):
+class BookBodyWithID(MyBaseModel):
     bid: int = Field(..., description='book id')
     age: Optional[int] = Field(None, ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 
 
-class BaseResponse(BaseModel):
+class BaseResponse(MyBaseModel):
     code: int = Field(0, description="Status Code")
     message: str = Field("ok", description="Exception Information")
 
@@ -76,7 +77,7 @@ class BookListResponseV1(BaseResponse):
     data: List[BookBodyWithID] = Field(..., description="All the books")
 
 
-class BookListResponseV2(BaseModel):
+class BookListResponseV2(MyBaseModel):
     books: List[BookBodyWithID] = Field(...)
 
 
@@ -84,7 +85,7 @@ class BookListResponseV3(RootModel):
     root: List[BookBodyWithID]
 
 
-class BookResponse(BaseModel):
+class BookResponse(MyBaseModel):
     code: int = Field(0, description="Status Code")
     message: str = Field("ok", description="Exception Information")
     data: BookBodyWithID

@@ -16,5 +16,5 @@ class Header(Parameter):
     param_in: Optional[ParameterInType] = None  # type:ignore
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

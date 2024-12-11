@@ -6,6 +6,7 @@ from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field
 
+from . import MyBaseModel
 from .parameter import Parameter
 from .reference import Reference
 from .server import Server
@@ -14,7 +15,7 @@ if typing.TYPE_CHECKING:  # pragma: no cover
     from .operation import Operation
 
 
-class PathItem(BaseModel):
+class PathItem(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#path-item-object
     """
@@ -33,5 +34,5 @@ class PathItem(BaseModel):
     parameters: Optional[List[Union[Parameter, Reference]]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

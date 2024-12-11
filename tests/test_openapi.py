@@ -5,6 +5,7 @@ from typing import Generic, TypeVar, List, Optional
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -13,7 +14,7 @@ def test_responses_are_replicated_in_open_api(request):
     test_app = OpenAPI(request.node.name)
     test_app.config["TESTING"] = True
 
-    class BaseResponse(BaseModel):
+    class BaseResponse(MyBaseModel):
         """Base description"""
         test: int
 
@@ -227,13 +228,13 @@ def test_responses_without_content_are_replicated_in_open_api(request):
         }
 
 
-class BaseRequest(BaseModel):
+class BaseRequest(MyBaseModel):
     """Base description"""
     test_int: int
     test_str: str
 
 
-class BaseRequestGeneric(BaseModel, Generic[T]):
+class BaseRequestGeneric(MyBaseModel, Generic[T]):
     detail: T
 
     model_config = dict(
@@ -335,7 +336,7 @@ def test_form_examples(request):
         }
 
 
-class BaseRequestBody(BaseModel):
+class BaseRequestBody(MyBaseModel):
     base: BaseRequest
 
 
@@ -354,15 +355,15 @@ def test_body_with_complex_object(request):
             resp.json["components"]["schemas"]["BaseRequestBody"].keys())
 
 
-class Detail(BaseModel):
+class Detail(MyBaseModel):
     num: int
 
 
-class GenericResponse(BaseModel, Generic[T]):
+class GenericResponse(MyBaseModel, Generic[T]):
     detail: T
 
 
-class ListGenericResponse(BaseModel, Generic[T]):
+class ListGenericResponse(MyBaseModel, Generic[T]):
     items: List[GenericResponse[T]]
 
 
@@ -393,7 +394,7 @@ def test_responses_with_generics(request):
         assert schemas["GenericResponse_Detail_"]["title"] == "GenericResponse[Detail]"
 
 
-class PathParam(BaseModel):
+class PathParam(MyBaseModel):
     type_name: str = Field(..., description="id for path", max_length=300,
                            json_schema_extra={"deprecated": False, "example": "42"})
 
@@ -427,7 +428,7 @@ def test_path_parameter_object(request):
         }
 
 
-class QueryParam(BaseModel):
+class QueryParam(MyBaseModel):
     count: int = Field(..., description="count of param", le=1000.0,
                        json_schema_extra={"deprecated": True, "example": 100})
 
@@ -461,11 +462,11 @@ def test_query_parameter_object(request):
         }
 
 
-class HeaderParam(BaseModel):
+class HeaderParam(MyBaseModel):
     app_name: str = Field(None, description="app name")
 
 
-class CookieParam(BaseModel):
+class CookieParam(MyBaseModel):
     app_name: str = Field(None, description="app name", json_schema_extra={"example": "aaa"})
 
 
@@ -498,7 +499,7 @@ def test_header_parameter_object(request):
         }
 
 
-class Model(BaseModel):
+class Model(MyBaseModel):
     one: Optional[int] = Field(default=None)
     two: Optional[int] = Field(default=2)
 

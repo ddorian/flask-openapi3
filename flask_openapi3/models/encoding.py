@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, Dict, Optional, Union
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .reference import Reference
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -13,7 +14,7 @@ else:
     Header = "Header"
 
 
-class Encoding(BaseModel):
+class Encoding(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#encoding-object
     """
@@ -25,5 +26,5 @@ class Encoding(BaseModel):
     allowReserved: bool = False
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

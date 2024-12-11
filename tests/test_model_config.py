@@ -7,12 +7,13 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI, FileStorage
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
 
 
-class UploadFilesForm(BaseModel):
+class UploadFilesForm(MyBaseModel):
     file: FileStorage
     str_list: List[str]
 
@@ -38,7 +39,7 @@ class UploadFilesForm(BaseModel):
     )
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: int
     author: str
 
@@ -68,7 +69,7 @@ class BookBody(BaseModel):
     )
 
 
-class MessageResponse(BaseModel):
+class MessageResponse(MyBaseModel):
     message: str = Field(..., description="The message")
     metadata: Dict[str, str] = Field(alias="metadata_")
 

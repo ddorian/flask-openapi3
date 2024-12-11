@@ -7,6 +7,7 @@ import pytest
 from pydantic import BaseModel
 
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
@@ -19,11 +20,11 @@ def client():
     return client
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: List[int] = [1, 2]
 
 
-class BookForm(BaseModel):
+class BookForm(MyBaseModel):
     age: List[float] = [3, 4]
 
 

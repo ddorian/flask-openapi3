@@ -5,6 +5,7 @@ from typing import Dict, Optional, Union, Any
 
 from pydantic import BaseModel, Field
 
+from . import MyBaseModel
 from .callback import Callback
 from .example import Example
 from .header import Header
@@ -18,7 +19,7 @@ from .schema import Schema
 from .security_scheme import SecurityScheme
 
 
-class Components(BaseModel):
+class Components(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#components-object
     """
@@ -35,5 +36,5 @@ class Components(BaseModel):
     pathItems: Optional[Dict[str, Union[PathItem, Reference]]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

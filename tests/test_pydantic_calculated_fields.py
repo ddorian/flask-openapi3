@@ -7,6 +7,7 @@ import pytest
 from pydantic import BaseModel, Field, computed_field
 
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
@@ -19,7 +20,7 @@ def client():
     return client
 
 
-class User(BaseModel):
+class User(MyBaseModel):
     firstName: str = Field(title="First Name")
     lastName: str
 

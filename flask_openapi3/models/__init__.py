@@ -12,7 +12,14 @@ https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md#table-o
 from typing import Optional, List, Dict, Union
 
 from flask import Request
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
+
+
+class MyBaseModel(BaseModel):
+    model_config = ConfigDict(
+        # faster startup
+        defer_build=True,
+    )
 
 from .callback import Callback
 from .components import Components
@@ -53,7 +60,10 @@ OPENAPI3_REF_PREFIX = "#/components/schemas"
 OPENAPI3_REF_TEMPLATE = OPENAPI3_REF_PREFIX + "/{model}"
 
 
-class APISpec(BaseModel):
+
+
+
+class APISpec(MyBaseModel):
     """https://spec.openapis.org/oas/v3.1.0#openapi-object"""
     openapi: str
     info: Info
@@ -66,11 +76,11 @@ class APISpec(BaseModel):
     webhooks: Optional[Dict[str, Union[PathItem, Reference]]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }
 
 
-class OAuthConfig(BaseModel):
+class OAuthConfig(MyBaseModel):
     """
     https://github.com/swagger-api/swagger-ui/blob/master/docs/usage/oauth2.md#oauth-20-configuration
     """

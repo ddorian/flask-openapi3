@@ -5,8 +5,10 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class Discriminator(BaseModel):
+
+class Discriminator(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#discriminator-object
     """
@@ -15,5 +17,5 @@ class Discriminator(BaseModel):
     mapping: Optional[Dict[str, str]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

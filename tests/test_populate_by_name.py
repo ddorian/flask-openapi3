@@ -7,6 +7,7 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
@@ -19,7 +20,7 @@ def client():
     return client
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: int
     author: str = Field(..., alias="author_name")
 
@@ -35,7 +36,7 @@ def get_book(query: BookQuery):
     return "ok"
 
 
-class QueryModel(BaseModel):
+class QueryModel(MyBaseModel):
     aliased_field: str = Field(alias="aliasedField")
 
     aliased_list_field: List[str] = Field(alias="aliasedListField")
@@ -47,7 +48,7 @@ def query_alias_test(query: QueryModel):
     return "ok"
 
 
-class HeaderModel(BaseModel):
+class HeaderModel(MyBaseModel):
     Hello1: str = Field(..., alias="Hello2")
 
     model_config = {"populate_by_name": True}
@@ -58,7 +59,7 @@ def get_book_header(header: HeaderModel):
     return header.model_dump(by_alias=True)
 
 
-class TupleModel(BaseModel):
+class TupleModel(MyBaseModel):
     values: Tuple[int, int]
     sequence: Sequence[int] = Field(alias="Sequence")
 
@@ -71,7 +72,7 @@ def tuple_test(query: TupleModel):
     return b"", 200
 
 
-class AliasModel(BaseModel):
+class AliasModel(MyBaseModel):
     aliased_field: str = Field(alias="aliasedField")
 
 

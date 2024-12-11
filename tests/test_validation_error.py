@@ -8,16 +8,17 @@ from flask import make_response, current_app
 from pydantic import BaseModel, Field, ValidationError
 
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 
-class GenericTracebackError(BaseModel):
+class GenericTracebackError(MyBaseModel):
     location: str = Field(..., json_schema_extra={"example": "GenericError.py"})
     line: int = Field(..., json_schema_extra={"example": 1})
     method: str = Field(..., json_schema_extra={"example": "GenericError"})
     message: str = Field(..., json_schema_extra={"example": "400:Bad Request"})
 
 
-class ValidationErrorModel(BaseModel):
+class ValidationErrorModel(MyBaseModel):
     code: str
     message: str
     more_info: List[GenericTracebackError] = Field(..., json_schema_extra={"example": [GenericTracebackError(
@@ -59,7 +60,7 @@ def client():
     return client
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: int = Field(None, description="Age")
 
 

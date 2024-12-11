@@ -5,6 +5,7 @@ from typing import Any, Dict, Optional, Union
 
 from pydantic import BaseModel, Field
 
+from . import MyBaseModel
 from .example import Example
 from .media_type import MediaType
 from .parameter_in_type import ParameterInType
@@ -12,7 +13,7 @@ from .reference import Reference
 from .schema import Schema
 
 
-class Parameter(BaseModel):
+class Parameter(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#parameter-object
     """
@@ -32,5 +33,5 @@ class Parameter(BaseModel):
     content: Optional[Dict[str, MediaType]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

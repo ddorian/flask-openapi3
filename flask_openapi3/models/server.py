@@ -5,10 +5,11 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .server_variable import ServerVariable
 
 
-class Server(BaseModel):
+class Server(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#server-object
     """
@@ -18,5 +19,5 @@ class Server(BaseModel):
     variables: Optional[Dict[str, ServerVariable]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

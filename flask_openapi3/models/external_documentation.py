@@ -5,8 +5,10 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class ExternalDocumentation(BaseModel):
+
+class ExternalDocumentation(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#external-documentation-object
     """
@@ -15,5 +17,5 @@ class ExternalDocumentation(BaseModel):
     url: str
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

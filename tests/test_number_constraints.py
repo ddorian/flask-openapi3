@@ -6,12 +6,13 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
 
 
-class MyModel(BaseModel):
+class MyModel(MyBaseModel):
     num_1: int = Field(..., ge=1, le=10)
     num_2: int = Field(..., gt=1, lt=10)
 

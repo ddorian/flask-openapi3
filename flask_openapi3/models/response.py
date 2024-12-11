@@ -5,13 +5,14 @@ from typing import Dict, Optional, Union
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .header import Header
 from .link import Link
 from .media_type import MediaType
 from .reference import Reference
 
 
-class Response(BaseModel):
+class Response(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#response-object
     """
@@ -22,5 +23,5 @@ class Response(BaseModel):
     links: Optional[Dict[str, Union[Link, Reference]]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

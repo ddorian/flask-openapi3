@@ -6,6 +6,7 @@ import pytest
 from pydantic import BaseModel
 
 from flask_openapi3 import Info, OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 info = Info(title='book API', version='1.0.0')
 
@@ -13,11 +14,11 @@ app = OpenAPI(__name__, info=info)
 app.config["TESTING"] = True
 
 
-class CreateBookBody(BaseModel):
+class CreateBookBody(MyBaseModel):
     pass
 
     model_config = {
-        "extra": "allow",
+        "extra": "allow", "defer_build": True,
     }
 
 

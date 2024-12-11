@@ -7,12 +7,13 @@ import pytest
 from pydantic import BaseModel, RootModel
 
 from flask_openapi3 import OpenAPI, Tag
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
 
 
-class Sellout(BaseModel):
+class Sellout(MyBaseModel):
     a: str
     b: int
 
@@ -29,9 +30,9 @@ class SelloutDict2(RootModel):
     root: Dict[Any, Any]
 
 
-class SelloutDict3(BaseModel):
+class SelloutDict3(MyBaseModel):
     model_config = {
-        "extra": "allow",
+        "extra": "allow", "defer_build": True,
     }
 
 

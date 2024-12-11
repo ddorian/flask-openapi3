@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 from flask_openapi3 import APIView
 from flask_openapi3 import OpenAPI, Tag, Info
+from flask_openapi3.models import MyBaseModel
 
 info = Info(title='book API', version='1.0.0')
 jwt = {
@@ -26,16 +27,16 @@ api_view = APIView(url_prefix="/api/v1/<name>", view_tags=[Tag(name="book")], vi
 api_view2 = APIView(doc_ui=False)
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     id: int = Field(..., description="book ID")
     name: str
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: Optional[int] = Field(None, description='Age')
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: Optional[int] = Field(..., ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 

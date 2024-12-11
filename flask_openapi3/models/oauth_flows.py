@@ -5,10 +5,11 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .oauth_flow import OAuthFlow
 
 
-class OAuthFlows(BaseModel):
+class OAuthFlows(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#oauth-flows-object
     """
@@ -19,5 +20,5 @@ class OAuthFlows(BaseModel):
     authorizationCode: Optional[OAuthFlow] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

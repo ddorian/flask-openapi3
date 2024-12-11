@@ -5,8 +5,10 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class XML(BaseModel):
+
+class XML(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#xml-object
     """
@@ -18,5 +20,5 @@ class XML(BaseModel):
     wrapped: bool = False
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

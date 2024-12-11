@@ -8,6 +8,7 @@ import pytest
 from pydantic import BaseModel
 
 from flask_openapi3 import FileStorage, OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
@@ -20,11 +21,11 @@ def client():
     return client
 
 
-class MetadataParameter(BaseModel):
+class MetadataParameter(MyBaseModel):
     tag: str
 
 
-class MetadataParameter2(BaseModel):
+class MetadataParameter2(MyBaseModel):
     tag2: str
 
 
@@ -33,7 +34,7 @@ class FileType(int, Enum):
     b = 2
 
 
-class FormParameters(BaseModel):
+class FormParameters(MyBaseModel):
     file: FileStorage
     file_list: List[FileStorage]
     file_type: FileType
@@ -56,7 +57,7 @@ class FormParameters(BaseModel):
     default_value: str = "default_value"
 
 
-class FormParameter(BaseModel):
+class FormParameter(MyBaseModel):
     obj: Dict[Any, Any]
 
     model_config = dict(

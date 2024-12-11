@@ -5,11 +5,12 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
+from . import MyBaseModel
 from .oauth_flows import OAuthFlows
 from .security_scheme_in_type import SecuritySchemeInType
 
 
-class SecurityScheme(BaseModel):
+class SecurityScheme(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#security-scheme-object
     """
@@ -24,5 +25,5 @@ class SecurityScheme(BaseModel):
     openIdConnectUrl: Optional[str] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

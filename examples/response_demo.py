@@ -16,11 +16,11 @@ app = OpenAPI(__name__, info=Info(title="Hello API", version="1.0.0"))
 bp = APIBlueprint("Hello BP", __name__)
 
 
-class HelloPath(BaseModel):
+class HelloPath(MyBaseModel):
     name: str = Field(..., description="The name")
 
 
-class Message(BaseModel):
+class Message(MyBaseModel):
     message: str = Field(..., description="The message")
 
     model_config = dict(

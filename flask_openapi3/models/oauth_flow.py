@@ -5,8 +5,10 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class OAuthFlow(BaseModel):
+
+class OAuthFlow(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#oauth-flow-object
     """
@@ -17,5 +19,5 @@ class OAuthFlow(BaseModel):
     scopes: Dict[str, str]
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

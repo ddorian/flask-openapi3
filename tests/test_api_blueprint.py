@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 from flask_openapi3 import APIBlueprint, OpenAPI
 from flask_openapi3 import Tag, Info
+from flask_openapi3.models import MyBaseModel
 
 info = Info(title='book API', version='1.0.0')
 
@@ -26,7 +27,7 @@ tag = Tag(name='book', description="Book")
 security = [{"jwt": []}]
 
 
-class Unauthorized(BaseModel):
+class Unauthorized(MyBaseModel):
     code: int = Field(-1, description="Status Code")
     message: str = Field("Unauthorized!", description="Exception Information")
 
@@ -53,12 +54,12 @@ def client():
     return client
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: Optional[int] = Field(..., ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     bid: int = Field(..., description='book id')
 
 

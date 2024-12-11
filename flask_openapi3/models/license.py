@@ -5,8 +5,10 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class License(BaseModel):
+
+class License(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#license-object
     """
@@ -16,5 +18,5 @@ class License(BaseModel):
     url: Optional[str] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

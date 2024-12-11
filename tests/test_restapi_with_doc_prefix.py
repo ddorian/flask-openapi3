@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 
 from flask_openapi3 import Info
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 info = Info(title='book API', version='1.0.0')
 
@@ -19,7 +20,7 @@ jwt = {
 security_schemes = {"jwt": jwt}
 
 
-class NotFoundResponse(BaseModel):
+class NotFoundResponse(MyBaseModel):
     code: int = Field(-1, description="Status Code")
     message: str = Field("Resource not found!", description="Exception Information")
 

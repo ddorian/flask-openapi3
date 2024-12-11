@@ -5,8 +5,10 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class Contact(BaseModel):
+
+class Contact(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#contact-object
     """
@@ -16,5 +18,5 @@ class Contact(BaseModel):
     email: Optional[str] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

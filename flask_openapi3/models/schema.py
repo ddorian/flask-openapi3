@@ -5,6 +5,7 @@ from typing import Any, Dict, List, Optional, Union
 
 from pydantic import BaseModel, Field
 
+from . import MyBaseModel
 from .data_type import DataType
 from .discriminator import Discriminator
 from .external_documentation import ExternalDocumentation
@@ -12,7 +13,7 @@ from .reference import Reference
 from .xml import XML
 
 
-class Schema(BaseModel):
+class Schema(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#schema-object
     """

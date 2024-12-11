@@ -5,10 +5,11 @@ from typing import Dict, Optional
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .media_type import MediaType
 
 
-class RequestBody(BaseModel):
+class RequestBody(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#request-body-object
     """
@@ -18,5 +19,5 @@ class RequestBody(BaseModel):
     required: Optional[bool] = True
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

@@ -13,7 +13,7 @@ app = OpenAPI(__name__, info=info)
 book_tag = Tag(name='book', description='Some Book')
 
 
-class Headers(BaseModel):
+class Headers(MyBaseModel):
     hello: str = Field("what's up", max_length=12, description='sds')
     # required
     # hello: str = Field(..., max_length=12, description='sds')

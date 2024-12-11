@@ -19,7 +19,7 @@ class Language(str, Enum):
     en = 'English'
 
 
-class LanguagePath(BaseModel):
+class LanguagePath(MyBaseModel):
     language: Language = Field(..., description='Language')
 
 

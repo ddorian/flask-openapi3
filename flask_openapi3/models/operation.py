@@ -5,6 +5,7 @@ from typing import Dict, List, Optional, Union
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .callback import Callback
 from .external_documentation import ExternalDocumentation
 from .parameter import Parameter
@@ -15,7 +16,7 @@ from .security_requirement import SecurityRequirement
 from .server import Server
 
 
-class Operation(BaseModel):
+class Operation(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#operation-object
     """
@@ -35,5 +36,5 @@ class Operation(BaseModel):
     servers: Optional[List[Server]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

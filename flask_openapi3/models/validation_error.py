@@ -5,8 +5,10 @@ from typing import List, Dict, Any, Optional
 
 from pydantic import BaseModel, Field
 
+from flask_openapi3.models import MyBaseModel
 
-class ValidationErrorModel(BaseModel):
+
+class ValidationErrorModel(MyBaseModel):
     # More information: https://docs.pydantic.dev/latest/usage/models/#error-handling
     loc: Optional[List[str]] = Field(None, title="Location", description="the error's location as a list. ")
     msg: Optional[str] = Field(None, title="Message", description="a computer-readable identifier of the error type.")

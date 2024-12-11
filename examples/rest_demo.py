@@ -45,7 +45,7 @@ oauth2 = {
 security_schemes = {"jwt": jwt, "api_key": api_key, "oauth2": oauth2, "basic": basic}
 
 
-class NotFoundResponse(BaseModel):
+class NotFoundResponse(MyBaseModel):
     code: int = Field(-1, description="Status Code")
     message: str = Field("Resource not found!", description="Exception Information")
 
@@ -60,27 +60,27 @@ security = [
 ]
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     bid: int = Field(..., description='book id', json_schema_extra={"deprecated": True, "example": 100})
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: Optional[int] = Field(None, description='Age')
     s_list: List[str] = Field(None, alias='s_list[]', description='some array')
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: Optional[int] = Field(..., ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 
 
-class BookBodyWithID(BaseModel):
+class BookBodyWithID(MyBaseModel):
     bid: int = Field(..., description='book id')
     age: Optional[int] = Field(None, ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 
 
-class BookResponse(BaseModel):
+class BookResponse(MyBaseModel):
     code: int = Field(0, description="Status Code")
     message: str = Field("ok", description="Exception Information")
     data: Optional[BookBodyWithID]

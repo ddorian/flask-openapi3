@@ -7,18 +7,19 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI, APIBlueprint
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
 api = APIBlueprint("/api", __name__, url_prefix="/api")
 
 
-class BookResponse(BaseModel):
+class BookResponse(MyBaseModel):
     code: int = Field(0, description="Status Code")
     message: str = Field("ok", description="Exception Information")
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     bid: int = Field(..., description="book id")
 
 

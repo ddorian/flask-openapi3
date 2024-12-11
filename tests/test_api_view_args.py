@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 
 from flask_openapi3 import APIView
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
@@ -14,7 +15,7 @@ app.config["TESTING"] = True
 api_view = APIView(url_prefix="/api/v1")
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     id: int = Field(..., description="book ID")
 
 

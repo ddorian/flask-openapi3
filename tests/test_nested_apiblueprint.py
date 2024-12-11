@@ -6,6 +6,7 @@ import pytest
 from pydantic import BaseModel
 
 from flask_openapi3 import APIBlueprint, OpenAPI, Tag
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 
@@ -14,7 +15,7 @@ api_english = APIBlueprint('english', __name__)
 api_chinese = APIBlueprint('chinese', __name__)
 
 
-class BookPath(BaseModel):
+class BookPath(MyBaseModel):
     name: str
 
 

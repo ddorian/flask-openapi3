@@ -5,8 +5,10 @@ from typing import List, Optional
 
 from pydantic import BaseModel
 
+from flask_openapi3.models import MyBaseModel
 
-class ServerVariable(BaseModel):
+
+class ServerVariable(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#server-variable-object
     """
@@ -16,5 +18,5 @@ class ServerVariable(BaseModel):
     description: Optional[str] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

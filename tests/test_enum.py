@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 
 from flask_openapi3 import Info
 from flask_openapi3 import OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(
     __name__,
@@ -23,7 +24,7 @@ class Language(str, Enum):
     en = 'English'
 
 
-class LanguagePath(BaseModel):
+class LanguagePath(MyBaseModel):
     language: Language = Field(..., description='Language')
 
 

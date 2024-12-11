@@ -8,21 +8,22 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI, APIView
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
 api_view = APIView(url_prefix="/api/v1")
 
 
-class Query(BaseModel):
+class Query(MyBaseModel):
     q: str
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: Optional[int] = Field(None, description="Age")
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: Optional[int] = Field(..., ge=2, le=4, description="Age")
     author: str = Field(None, min_length=2, max_length=4, description="Author")
 

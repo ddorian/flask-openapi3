@@ -11,12 +11,12 @@ from flask_openapi3 import OpenAPI, FileStorage
 app = OpenAPI(__name__)
 
 
-class UploadFileForm(BaseModel):
+class UploadFileForm(MyBaseModel):
     file: FileStorage
     file_type: str = Field(None, description="File Type")
 
 
-class UploadFilesForm(BaseModel):
+class UploadFilesForm(MyBaseModel):
     files: List[FileStorage]
     str_list: List[str]
     int_list: List[int]

@@ -5,11 +5,12 @@ from typing import Optional
 
 from pydantic import BaseModel
 
+from . import MyBaseModel
 from .contact import Contact
 from .license import License
 
 
-class Info(BaseModel):
+class Info(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#info-object
     """
@@ -23,5 +24,5 @@ class Info(BaseModel):
     version: str
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

@@ -5,13 +5,14 @@ from typing import Any, Dict, Optional, Union
 
 from pydantic import BaseModel, Field
 
+from . import MyBaseModel
 from .encoding import Encoding
 from .example import Example
 from .reference import Reference
 from .schema import Schema
 
 
-class MediaType(BaseModel):
+class MediaType(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#media-type-object
     """
@@ -22,5 +23,5 @@ class MediaType(BaseModel):
     encoding: Optional[Dict[str, Encoding]] = None
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

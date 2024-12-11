@@ -3,8 +3,10 @@
 # @Time    : 2023/7/4 9:53
 from pydantic import BaseModel, Field
 
+from flask_openapi3.models import MyBaseModel
 
-class Reference(BaseModel):
+
+class Reference(MyBaseModel):
     """
     https://spec.openapis.org/oas/v3.1.0#reference-object
     """
@@ -12,5 +14,5 @@ class Reference(BaseModel):
     ref: str = Field(..., alias="$ref")
 
     model_config = {
-        "extra": "allow"
+        "extra": "allow", "defer_build": True,
     }

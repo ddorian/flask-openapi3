@@ -10,7 +10,7 @@ from flask_openapi3 import OpenAPI, FileStorage
 app = OpenAPI(__name__)
 
 
-class UploadFilesForm(BaseModel):
+class UploadFilesForm(MyBaseModel):
     file: FileStorage
     str_list: List[str]
 
@@ -36,7 +36,7 @@ class UploadFilesForm(BaseModel):
     )
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: int
     author: str
 

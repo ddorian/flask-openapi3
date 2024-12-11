@@ -9,6 +9,7 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import OpenAPI, FileStorage, RawModel
+from flask_openapi3.models import MyBaseModel
 
 app = OpenAPI(__name__)
 app.config["TESTING"] = True
@@ -26,28 +27,28 @@ class TypeEnum(str, Enum):
     B = "B"
 
 
-class BookForm(BaseModel):
+class BookForm(MyBaseModel):
     file: FileStorage
     files: List[FileStorage]
     string: str
     string_list: List[str]
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: List[int]
     book_type: Optional[TypeEnum] = None
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: int
 
 
-class BookCookie(BaseModel):
+class BookCookie(MyBaseModel):
     token: Optional[str] = None
     token_type: Optional[TypeEnum] = None
 
 
-class BookHeader(BaseModel):
+class BookHeader(MyBaseModel):
     Hello1: str = Field("what's up", max_length=12, description="sds")
     # required
     hello2: str = Field(..., max_length=12, description="sds")

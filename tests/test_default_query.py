@@ -5,6 +5,7 @@ import pytest
 from pydantic import BaseModel, Field
 
 from flask_openapi3 import Info, OpenAPI
+from flask_openapi3.models import MyBaseModel
 
 info = Info(title='book API', version='1.0.0')
 
@@ -12,7 +13,7 @@ app = OpenAPI(__name__, info=info)
 app.config["TESTING"] = True
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     page: int = Field(1, description='current page')
     page_size: int = Field(15, description='size of per page')
 

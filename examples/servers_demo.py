@@ -16,7 +16,7 @@ app = OpenAPI(__name__, info=info, servers=servers)
 book_tag = Tag(name="book", description="Some Book")
 
 
-class BookQuery(BaseModel):
+class BookQuery(MyBaseModel):
     age: int
     author: str
 

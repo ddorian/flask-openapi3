@@ -24,7 +24,7 @@ tag = Tag(name='book', description="Some Book")
 security = [{"jwt": []}]
 
 
-class Unauthorized(BaseModel):
+class Unauthorized(MyBaseModel):
     code: int = Field(-1, description="Status Code")
     message: str = Field("Unauthorized!", description="Exception Information")
 
@@ -41,12 +41,12 @@ api = APIBlueprint(
 )
 
 
-class BookBody(BaseModel):
+class BookBody(MyBaseModel):
     age: Optional[int] = Field(..., ge=2, le=4, description='Age')
     author: str = Field(None, min_length=2, max_length=4, description='Author')
 
 
-class Path(BaseModel):
+class Path(MyBaseModel):
     bid: int = Field(..., description='book id')
 
 
